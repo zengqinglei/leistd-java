@@ -1,0 +1,33 @@
+leistd:
+  company-name: devcloud
+  project-name: permission
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: ${leistd.project-name}-service
+  cloud:
+    nacos:
+      server-addr: ${NACOS_ADDRESS:}
+      username: ${NACOS_USERNAME:}
+      password: ${NACOS_PASSWORD:}
+      discovery:
+        namespace: enterprise-${spring.profiles.active}
+      config:
+        # 命名空间用作不同环境的配置区分隔离
+        namespace: enterprise-${spring.profiles.active}
+        # 常用作不同的应用或组件的配置组，这里默认只使用DEFAULT_GROUP
+        prefix: none
+        group: JAVA
+        file-extension: yml
+        # 共享配置
+        sharedConfigs:
+          - dataId: service-common.${spring.cloud.nacos.config.file-extension}
+            group: JAVA
+            refresh: true
+        # 扩展配置，优先级高于共享配置
+        extension-configs:
+          - dataId: ${spring.application.name}.${spring.cloud.nacos.config.file-extension}
+            group: JAVA
+            refresh: true

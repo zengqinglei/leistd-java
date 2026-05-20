@@ -1,0 +1,43 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.mysoft.leistd</groupId>
+        <artifactId>leistd-tracing</artifactId>
+        <version>${revision}</version>
+    </parent>
+
+    <artifactId>leistd-tracing-headerfeign</artifactId>
+    <packaging>jar</packaging>
+    <name>${project.artifactId}</name>
+
+    <dependencies>
+        <!--LeiStd components Modules -->
+        <dependency>
+            <groupId>com.mysoft.leistd</groupId>
+            <artifactId>leistd-tracing-mvc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.mysoft.leistd</groupId>
+            <artifactId>leistd-core</artifactId>
+        </dependency>
+
+        <!-- 工具包 -->
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-core</artifactId>
+        </dependency>
+
+        <!-- 测试包 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>

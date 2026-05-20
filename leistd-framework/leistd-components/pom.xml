@@ -1,0 +1,90 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.mysoft.leistd</groupId>
+        <artifactId>leistd-framework</artifactId>
+        <version>${revision}</version>
+    </parent>
+
+    <artifactId>leistd-components</artifactId>
+    <name>${project.artifactId}</name>
+    <packaging>pom</packaging>
+
+    <properties>
+        <!-- 组件依赖版本 -->
+        <logback-logstash.version>7.4</logback-logstash.version>
+        <spring-cloud.version>2023.0.3</spring-cloud.version>
+    </properties>
+
+    <modules>
+        <module>leistd-core</module>
+        <module>leistd-mdc</module>
+        <module>leistd-json</module>
+        <module>leistd-enum</module>
+        <module>leistd-date</module>
+        <module>leistd-dto</module>
+        <module>leistd-tracing</module>
+        <module>leistd-exception</module>
+        <module>leistd-security</module>
+        <module>leistd-logging</module>
+        <module>leistd-response</module>
+        <module>leistd-dstblock</module>
+        <module>leistd-locallock</module>
+    </modules>
+
+    <dependencies>
+        <!-- 工具包 -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <!-- 测试包 -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <!--LeiStd Modules -->
+            <dependency>
+                <groupId>com.mysoft.leistd</groupId>
+                <artifactId>leistd-framework-dependencies</artifactId>
+                <version>${project.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Spring framework 组件 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- 工具包 -->
+            <dependency>
+                <groupId>net.logstash.logback</groupId>
+                <artifactId>logstash-logback-encoder</artifactId>
+                <version>${logback-logstash.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>

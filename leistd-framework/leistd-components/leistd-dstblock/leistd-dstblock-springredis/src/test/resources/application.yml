@@ -1,0 +1,14 @@
+spring:
+  jackson:
+    mapper:
+      ACCEPT_CASE_INSENSITIVE_PROPERTIES: true
+    serialization:
+      write-dates-as-timestamps: false
+    # date-format: yyyy-MM-dd'T'HH:mm:ss.SSSZ
+    time-zone: Asia/Shanghai
+  data:
+    redis:
+      host: INTERNAL_IP_REMOVED
+      port: 6379
+      password: REDIS_PASSWORD_REMOVED
+      database: 0
