@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true">
+    <!-- https://github.com/spring-projects/spring-boot/blob/v1.4.2.RELEASE/spring-boot/src/main/resources/org/springframework/boot/logging/logback/defaults.xml -->
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+    <springProperty scope="context" name="COMPANY_NAME" source="leistd.company-name"/>
+    <springProperty scope="context" name="PROJECT_NAME" source="leistd.project-name"/>
+    <springProperty scope="context" name="LOG_PATH" source="logging.file.path" defaultValue="./logs"/>
+    <springProperty scope="context" name="LOG_LEVEL" source="logging.level" defaultValue="info"/>
+    <property name="LOG_FILE_PREFIX" value="${LOG_PATH}/${COMPANY_NAME}-${PROJECT_NAME}"/>
+
+    <appender name="REQUEST_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_FILE_PREFIX}-requestlog.log</file>
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <pattern>
+                    <pattern>
+                        {
+                        "@timestamp": "%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ}",
+                        "logTime": "%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ}",
+                        "logType": "requestlog",
+                        "companyName": "${COMPANY_NAME}",
+                        "projectName": "${PROJECT_NAME}",
+                        "systemName": "${COMPANY_NAME}",
+                        "serviceName": "${PROJECT_NAME}",
+                        "traceId": "%X{leistd.correlationId.traceId}",
+                        "thread": "%thread",
+                        "sourceContext": "%logger:%line",
+                        "hostName": "${hostName}",
+                        "ipAddress": "%X{leistd.requestLogging.ipAddress}",
+                        "userId": "%X{leistd.security.userId}",
+                        "username": "%X{leistd.security.username}",
+                        "requestHeader": "%X{leistd.requestLogging.requestHeader}",
+                        "requestMethod": "%X{leistd.requestLogging.method}",
+                        "requestScheme": "%X{leistd.requestLogging.requestScheme}",
+                        "requestServerName": "%X{leistd.requestLogging.requestServerName}",
+                        "requestServerPort": "%X{leistd.requestLogging.requestServerPort}",
+                        "requestContextPath": "%X{leistd.requestLogging.requestContextPath}",
+                        "requestUri": "%X{leistd.requestLogging.requestUri}",
+                        "requestQueryString": "%X{leistd.requestLogging.requestQueryString}",
+                        "statusCode": "%X{leistd.requestLogging.statusCode}",
+                        "elapsed": "%X{leistd.requestLogging.elapsed}",
+                        "requestBody": "%X{leistd.requestLogging.requestBody}",
+                        "responseBody": "%X{leistd.requestLogging.responseBody}",
+                        "requestUrl": "%X{leistd.requestLogging.requestUrl}",
+                        "level": "%level",
+                        "message": "%message"
+                        }
+                    </pattern>
+                </pattern>
+            </providers>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_FILE_PREFIX}-requestlog-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <maxHistory>10</maxHistory>
+            <maxFileSize>10MB</maxFileSize>
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="SYSTEM_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_FILE_PREFIX}-systemlog.log</file>
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <pattern>
+                    <pattern>
+                        {
+                        "@timestamp": "%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ}",
+                        "logTime": "%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ}",
+                        "logType": "systemlog",
+                        "companyName": "${COMPANY_NAME}",
+                        "projectName": "${PROJECT_NAME}",
+                        "systemName": "${COMPANY_NAME}",
+                        "serviceName": "${PROJECT_NAME}",
+                        "traceId": "%X{leistd.correlationId.traceId}",
+                        "thread": "%thread",
+                        "sourceContext": "%logger:%line",
+                        "hostName": "${hostName}",
+                        "ipAddress": "%X{leistd.requestLogging.ipAddress}",
+                        "userId": "%X{leistd.security.userId}",
+                        "username": "%X{leistd.security.username}",
+                        "level": "%level",
+                        "message": "%message",
+                        "exceptions": "%exception"
+                        }
+                    </pattern>
+                </pattern>
+            </providers>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_FILE_PREFIX}-systemlog-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <maxHistory>10</maxHistory>
+            <maxFileSize>10MB</maxFileSize>
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="BUSSINESS_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_FILE_PREFIX}-businesslog.log</file>
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <pattern>
+                    <pattern>
+                        {
+                        "@timestamp": "%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ}",
+                        "logTime": "%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ}",
+                        "logType": "businesslog",
+                        "companyName": "${COMPANY_NAME}",
+                        "projectName": "${PROJECT_NAME}",
+                        "systemName": "${COMPANY_NAME}",
+                        "serviceName": "${PROJECT_NAME}",
+                        "traceId": "%X{leistd.correlationId.traceId}",
+                        "thread": "%thread",
+                        "sourceContext": "%logger:%line",
+                        "hostName": "${hostName}",
+                        "ipAddress": "%X{leistd.requestLogging.ipAddress}",
+                        "userId": "%X{leistd.security.userId}",
+                        "username": "%X{leistd.security.username}",
+                        "level": "%level",
+                        "message": "%message",
+                        "exceptions": "%exception"
+                        }
+                    </pattern>
+                </pattern>
+            </providers>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_FILE_PREFIX}-businesslog-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <maxHistory>10</maxHistory>
+            <maxFileSize>10MB</maxFileSize>
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
+
+    <logger name="com.mysoft.leistd.logging.RequestLoggingFilter" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="REQUEST_LOG"/>
+    </logger>
+
+    <logger name="com.mysoft.leistd.exception.DefaultExceptionHandler" level="${LOG_LEVEL}" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="BUSSINESS_LOG"/>
+    </logger>
+
+    <logger name="com.mysoft.${PROJECT_NAME}" level="${LOG_LEVEL}" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="BUSSINESS_LOG"/>
+    </logger>
+
+    <root level="${LOG_LEVEL}">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="SYSTEM_LOG"/>
+    </root>
+
+</configuration>

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.mysoft.leistd</groupId>
+    <artifactId>leistd-ddd-demo</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>${project.artifactId}</name>
+
+    <properties>
+        <!-- 项目配置 -->
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- Maven插件版本 -->
+        <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
+        <spring-boot-maven-plugin.version>2.5.15</spring-boot-maven-plugin.version>
+
+        <!-- 框架依赖版本 -->
+        <spring-boot.version>2.5.15</spring-boot.version>
+        <spring-cloud.version>2020.0.6</spring-cloud.version>
+        <leistd-framework.version>0.5.64</leistd-framework.version>
+
+        <!-- 组件依赖版本 -->
+        <lombok.version>1.18.34</lombok.version>
+        <jodd.version>6.2.2</jodd.version>
+        <mapstruct.version>1.5.5.Final</mapstruct.version>
+        <logback-logstash.version>7.4</logback-logstash.version>
+        <nacos.version>2021.1</nacos.version>
+        <mysql.version>9.0.0</mysql.version>
+    </properties>
+
+    <dependencies>
+        <!-- 测试包 -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <modules>
+        <module>permission-adapter</module>
+        <module>permission-app</module>
+        <module>permission-domain</module>
+        <module>permission-infrastructure</module>
+        <module>permission-start</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- LeiStd Modules -->
+            <dependency>
+                <groupId>com.mysoft.leistd</groupId>
+                <artifactId>leistd-framework-dependencies</artifactId>
+                <version>${leistd-framework.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Project modules-->
+            <dependency>
+                <groupId>com.mysoft.leistd</groupId>
+                <artifactId>permission-adapter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.mysoft.leistd</groupId>
+                <artifactId>permission-app</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.mysoft.leistd</groupId>
+                <artifactId>permission-domain</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.mysoft.leistd</groupId>
+                <artifactId>permission-infrastructure</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- Spring framework 组件 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- 工具包 -->
+            <dependency>
+                <groupId>org.jodd</groupId>
+                <artifactId>jodd-util</artifactId>
+                <version>${jodd.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-processor</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.logstash.logback</groupId>
+                <artifactId>logstash-logback-encoder</artifactId>
+                <version>${logback-logstash.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+                <version>${nacos.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+                <version>${nacos.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.mysql</groupId>
+                <artifactId>mysql-connector-j</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                    <configuration>
+                        <parameters>true</parameters>
+                        <annotationProcessorPaths>
+                            <!-- Lombok 在编译时会通过这个插件生成代码 -->
+                            <path>
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok</artifactId>
+                                <version>${lombok.version}</version>
+                            </path>
+                            <!-- MapStruct 在编译时会通过这个插件生成代码 -->
+                            <path>
+                                <groupId>org.mapstruct</groupId>
+                                <artifactId>mapstruct-processor</artifactId>
+                                <version>${mapstruct.version}</version>
+                            </path>
+                        </annotationProcessorPaths>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>

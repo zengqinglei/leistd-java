@@ -1,0 +1,25 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.mysoft.leistd</groupId>
+        <artifactId>leistd-ddd-struct</artifactId>
+        <version>${revision}</version>
+    </parent>
+
+    <artifactId>leistd-ddd-app</artifactId>
+    <packaging>jar</packaging>
+    <name>${project.artifactId}</name>
+
+    <dependencies>
+        <!--LeiStd framework Modules-->
+        <dependency>
+            <groupId>com.mysoft.leistd</groupId>
+            <artifactId>leistd-dto</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.mysoft.leistd</groupId>
+            <artifactId>leistd-ddd-domain</artifactId>
+        </dependency>
+    </dependencies>
+</project>
