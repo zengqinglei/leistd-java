@@ -1,0 +1,8 @@
+### Custom ###
+logs
+*-dev.yml
+*-local.yml
+*-debug.yml
+*-dev.yaml
+*-local.yaml
+*-debug.yaml

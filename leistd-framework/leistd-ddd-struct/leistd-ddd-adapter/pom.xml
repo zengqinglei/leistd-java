@@ -1,0 +1,67 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.mysoft.leistd</groupId>
+        <artifactId>leistd-ddd-struct</artifactId>
+        <version>${revision}</version>
+    </parent>
+
+    <artifactId>leistd-ddd-adapter</artifactId>
+    <packaging>jar</packaging>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
+
+    <dependencies>
+        <!--LeiStd framework Modules-->
+        <dependency>
+            <groupId>com.mysoft.leistd</groupId>
+            <artifactId>leistd-mdc-mvc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.mysoft.leistd</groupId>
+            <artifactId>leistd-tracing-mvc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.mysoft.leistd</groupId>
+            <artifactId>leistd-exception-mvc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.mysoft.leistd</groupId>
+            <artifactId>leistd-response-mvc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.mysoft.leistd</groupId>
+            <artifactId>leistd-logging-mvc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.mysoft.leistd</groupId>
+            <artifactId>leistd-date-mvc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.mysoft.leistd</groupId>
+            <artifactId>leistd-enum-mvc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.mysoft.leistd</groupId>
+            <artifactId>leistd-ddd-app</artifactId>
+        </dependency>
+
+        <!-- 工具包 -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-xml</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+        </dependency>
+
+        <!-- 测试包 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>
